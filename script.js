@@ -1,95 +1,76 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // ---- NEW: LENIS SMOOTH SCROLL INITIALIZATION ----
-    const lenis = new Lenis();
-
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+// Functionality for header scroll effect
+document.addEventListener('scroll', () => {
+    const header = document.querySelector('#main-header');
+    if (window.scrollY > 0) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
     }
+});
 
-    requestAnimationFrame(raf);
-    // --------------------------------------------------
+// Functionality for the search bar toggle
+const searchToggle = document.querySelector('.search-toggle');
+const searchContainer = document.querySelector('.search-container');
+const searchInput = document.querySelector('.search-input');
 
-
-    // ---- Carousel Initialization (No changes needed here) ----
-    var myCarousel = document.getElementById('heroCarousel');
-    if (myCarousel) {
-        var carousel = new bootstrap.Carousel(myCarousel, {
-            interval: 3000,
-            pause: 'hover'
-        });
+searchToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    searchContainer.classList.toggle('active');
+    if (searchContainer.classList.contains('active')) {
+        searchInput.focus();
     }
+});
 
-    // ---- Header Scroll Effect (No changes needed here) ----
-    const mainHeader = document.getElementById('main-header');
+// Functionality for the About Us tabs
+const tabs = document.querySelectorAll('.tab');
+const tabContents = document.querySelectorAll('.tab-content');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 10) {
-            mainHeader.classList.add('scrolled');
-        } else {
-            mainHeader.classList.remove('scrolled');
-        }
-    });
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs and hide all content
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(c => c.style.display = 'none');
 
+        // Add active class to the clicked tab
+        tab.classList.add('active');
 
-    // ---- FIX: ABOUT US TABS FUNCTIONALITY (MOVED INSIDE DOMContentLoaded) ----
-    const tabs = document.querySelectorAll('.about-tabs .tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active from all tabs
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            // Show corresponding content
-            const target = tab.getAttribute('data-tab');
-            tabContents.forEach(content => {
-                if(content.id === target) {
-                    content.style.display = 'block';
-                } else {
-                    content.style.display = 'none';
-                }
-            });
-        });
+        // Show the corresponding content
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(tabId).style.display = 'block';
     });
 });
 
- // ---- NEW: Search Functionality (In-line Expansion) ----
+// The following section for the login modal has been commented out, as per the request
+// It is kept here in case you want to enable it later.
 
-    const searchContainer = document.querySelector('.search-container');
-    const searchToggle = document.querySelector('.search-toggle');
-    const searchInput = document.querySelector('.search-input');
+/*
+// Login/Signup Modal Functionality
+const loginLink = document.querySelector('.login-link');
+const closeIcon = document.querySelector('.icon-close');
+const wrapper = document.querySelector('.wrapper');
+const modalWrapper = document.querySelector('.login-modal-wrapper');
 
-    // Function to toggle the search bar's visibility
-    function toggleSearch() {
-        searchContainer.classList.toggle('active');
-        if (searchContainer.classList.contains('active')) {
-            searchInput.focus(); // Automatically focus the input field
-        } else {
-            searchInput.value = ''; // Clear the input when it's hidden
-        }
-    }
+loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    wrapper.classList.add('active-popup');
+    modalWrapper.classList.add('active-modal');
+});
 
-    // Event listener for the search icon
-    searchToggle.addEventListener('click', function(event) {
-        event.preventDefault();
-        toggleSearch();
-    });
+closeIcon.addEventListener('click', () => {
+    wrapper.classList.remove('active-popup');
+    modalWrapper.classList.remove('active-modal');
+});
+*/
 
-    // Event listener to hide the search bar on an outside click
-    document.addEventListener('click', function(event) {
-        // Check if the click is outside the search container
-        if (!searchContainer.contains(event.target) && searchContainer.classList.contains('active')) {
-            toggleSearch();
-        }
-    });
+// Lenis smooth scrolling functionality
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+});
 
-    // Event listener to hide the search bar with the ESC key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && searchContainer.classList.contains('active')) {
-            toggleSearch();
-        }
-    });
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
 
+requestAnimationFrame(raf);
