@@ -5,8 +5,7 @@ body {
     font-family: 'Oswald', sans-serif;
     color: white;
     background-color: black;
-    /* CHANGE: Removed padding-top so the YouTube section starts at the top */
-    padding-top: 0; 
+    padding-top: 0;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bungee', cursive;
@@ -19,26 +18,23 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     z-index: 1030;
-    /* CHANGE: Initial background is now transparent */
-    background: transparent; 
+    background: transparent;
     transition: background-color 0.3s ease-in-out;
 }
 
-/* Style for the header once the user scrolls (This remains the same and is correct) */
 #main-header.scrolled {
-    background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(8px);
+    /* Updated background to be more transparent */
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
 }
 
-/* Top part of the header (Logo/Buttons) */
 .main-navbar {
     height: 100px;
     padding: 0 20px;
-        overflow: hidden;
+    overflow: hidden;
     transition: max-height 0.4s ease-in-out;
     max-height: 100px;
 }
-/* Re-show the main-navbar when the header is hovered, but only when scrolled */
 #main-header.scrolled:hover .main-navbar {
     max-height: 100px;
 }
@@ -47,11 +43,9 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 0;
 }
 
-/* Bottom part of the header (Links) */
 .sub-navbar {
     height: 50px;
-    /* CHANGE: Border is less visible initially */
-    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 #main-header.scrolled .sub-navbar {
     border-top: 1px solid transparent;
@@ -67,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #e74c3c;
 }
 
-/* --- LOGO AND BUTTON STYLES (WITH FIX) --- */
+/* --- LOGO AND BUTTON STYLES --- */
 .logo {
     font-weight: bold;
     color: white;
@@ -76,18 +70,15 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    /* FIX: Set an explicit, slightly taller height to prevent clipping */
-    height: 60px; 
+    height: 60px;
 }
 
 .logo span {
     font-family: 'Bungee', cursive;
     display: block;
     transition: transform 0.3s ease;
-    /* FIX: Set a more reasonable font-size that fits the navbar */
-    font-size: 26px; 
-    /* FIX: Set line-height to match the parent's height to vertically center it */
-    line-height: 30px; 
+    font-size: 26px;
+    line-height: 30px;
 }
 
 .logo::after {
@@ -101,8 +92,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
-    /* FIX: Set line-height to match parent's height for vertical centering */
-    line-height: 30px; 
+    line-height: 30px;
 }
 
 .logo:hover span {
@@ -114,8 +104,8 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-buttons {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
-/* REVISED CSS for the Download Button */
 .download-btn {
     position: relative;
     color: white;
@@ -125,11 +115,10 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     overflow: hidden;
     background-color: #e74c3c;
-    transition: all 0.4s ease; /* A slightly longer transition for a smoother effect */
-    z-index: 1; /* Ensure the button and its content are above the glass background */
+    transition: all 0.4s ease;
+    z-index: 1;
 }
 
-/* Frosted glass layer behind the button text */
 .download-btn::before {
     content: '';
     position: absolute;
@@ -137,7 +126,6 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    /* IMPORTANT: VERIFY THIS IMAGE PATH! */
     background: url('Minecraft\ live\ wallpaper\ #1\ -\ Shadow\ Creates\ \(1080p\,\ h264\).mp4') no-repeat center center / cover;
     filter: blur(10px);
     opacity: 0;
@@ -145,13 +133,12 @@ h1, h2, h3, h4, h5, h6 {
     transition: opacity 0.4s ease;
 }
 
-/* The Shine Effect Layer */
 .download-btn::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 25px; /* Adjust the width of the shine band */
+    width: 25px;
     height: 100%;
     background: linear-gradient(
         90deg,
@@ -159,11 +146,10 @@ h1, h2, h3, h4, h5, h6 {
         rgba(255, 255, 255, 0.6),
         rgba(255, 255, 255, 0.1)
     );
-    transform: translateX(-150%) skewX(-30deg); /* Start off-screen and angled */
-    transition: transform 0.6s ease; /* Longer transition for a "passing" effect */
+    transform: translateX(-150%) skewX(-30deg);
+    transition: transform 0.6s ease;
 }
 
-/* Hover state: make button background transparent, show glass, and animate the shine */
 .download-btn:hover {
     background-color: transparent;
     transform: translateY(-2px);
@@ -175,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .download-btn:hover::after {
-    transform: translateX(250%) skewX(-30deg); /* Animate the shine across the button */
+    transform: translateX(250%) skewX(-30deg);
 }
 .menu-btn {
     background-color: transparent;
@@ -190,8 +176,22 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
 }
 
+/* New style for the login link now in the main nav bar */
+.navbar-buttons .login-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    text-decoration: none;
+    margin-left: 30px; /* Increased margin for more gap */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Spacing between icon and text */
+}
+.navbar-buttons .login-link:hover {
+    color: white;
+}
 
-/* --- YOUTUBE SECTION STYLES (Unchanged) --- */
+
 /* --- YOUTUBE SECTION STYLES (with fix) --- */
 #youtube-section {
     position: relative;
@@ -202,12 +202,12 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     padding: 0 3rem;
     text-align: left;
-    transition: filter 0.3s ease-in-out; /* Add transition for smooth effect */
-    filter: blur(3px); /* Default blur */
+    transition: filter 0.3s ease-in-out;
+    filter: blur(3px);
 }
 
 #youtube-section:hover {
-    filter: none; /* Remove blur on hover */
+    filter: none;
 }
 
 .youtube-background-video {
@@ -309,11 +309,8 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     position: relative;
     overflow: hidden;
-    /* FIX: The background color is now removed to show the video underneath */
-    /* background-color: #111; */
 }
 
-/* FIX: The `about-us-background-video` now covers the whole section */
 .about-us-background-video {
     position: absolute;
     top: 0;
@@ -322,10 +319,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     object-fit: cover;
     filter: blur(3px);
-    z-index: -2; /* This places it behind all other content */
+    z-index: -2;
 }
 
-/* The overlay remains the same and is necessary for readability */
 .about-us-overlay {
     position: absolute;
     top: 0;
@@ -343,10 +339,9 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     gap: 2rem;
     position: relative;
-    z-index: 1; /* This ensures the content is on top */
+    z-index: 1;
 }
 
-/* Tabs on the left */
 .about-tabs {
     display: flex;
     flex-direction: column;
@@ -367,11 +362,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-tabs .tab:hover,
 .about-tabs .tab.active {
-    background: #00ffff; /* aqua highlight for active tab */
+    background: #00ffff;
     color: black;
 }
 
-/* Content area */
 .about-content {
     display: flex;
     flex: 1;
@@ -379,7 +373,6 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-/* Image on left */
 .about-image img {
     width: 300px;
     height: 300px;
@@ -387,7 +380,6 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
 }
 
-/* Text on right */
 .about-text {
     flex: 1;
 }
@@ -396,7 +388,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Bungee', cursive;
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #00ffff; /* aqua heading */
+    color: #00ffff;
 }
 
 .about-text .tab-content p {
@@ -406,7 +398,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* --- CAROUSEL STYLES (Unchanged) --- */
+/* --- CAROUSEL STYLES --- */
 .carousel-item {
     height: 100vh;
     min-height: 350px;
@@ -445,8 +437,11 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2rem;
     line-height: 1.5;
 }
+
+/* Adjusted button size here */
 .carousel-caption .btn {
-    padding: 0.75rem 2rem;
+    padding: 0.6rem 1rem; /* Increased height, decreased width */
+    font-size: 1rem; /* Slightly larger font for better balance */
     border-radius: 9999px;
     transition: transform 0.3s ease;
 }
@@ -476,20 +471,15 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     display: flex;
     align-items: center;
-    /* Pushes the container to the right */
-    margin-left: auto;
 }
 
 .search-input {
- width: 0;
+    width: 0;
     padding: 0;
     opacity: 0;
-    
-    /* NEW: Transparent background and blurred effect */
     background: transparent;
-    border: 1px solid #888; /* A lighter border to make it visible */
+    border: 1px solid #888;
     backdrop-filter: blur(5px);
-    
     color: white;
     font-size: 1rem;
     font-family: 'Oswald', sans-serif;
@@ -498,19 +488,208 @@ h1, h2, h3, h4, h5, h6 {
     height: 40px;
 }
 
-/* State when the search bar is active */
 .search-container.active .search-input {
-    width: 250px; /* Or any desired width */
+    width: 250px;
     padding: 10px 15px;
     opacity: 1;
     border: 1px solid #444;
     margin-right: 10px;
 }
 
-/* Style the search icon's link */
 .search-toggle {
-    /* Ensure the icon is centered */
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* --- Login Modal Styles (NEW) --- */
+.login-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modal-wrapper.active-modal {
+    display: flex;
+}
+
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+.wrapper.active-popup {
+    transform: scale(1);
+}
+
+.wrapper.active {
+    height: 520px;
+}
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.wrapper .form-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .form-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2 {
+    font-size: 2em;
+    color: #162938;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162938;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    color: #162938;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #162938;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
 }
