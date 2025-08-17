@@ -1,0 +1,516 @@
+/* Custom Styles for the Sarknight Website */
+
+/* General Body and Typography */
+body {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    background-color: black;
+    /* CHANGE: Removed padding-top so the YouTube section starts at the top */
+    padding-top: 0; 
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bungee', cursive;
+}
+
+/* --- NEW HEADER STYLES --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    /* CHANGE: Initial background is now transparent */
+    background: transparent; 
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Style for the header once the user scrolls (This remains the same and is correct) */
+#main-header.scrolled {
+    background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+}
+
+/* Top part of the header (Logo/Buttons) */
+.main-navbar {
+    height: 100px;
+    padding: 0 20px;
+        overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    max-height: 100px;
+}
+/* Re-show the main-navbar when the header is hovered, but only when scrolled */
+#main-header.scrolled:hover .main-navbar {
+    max-height: 100px;
+}
+
+#main-header.scrolled .main-navbar {
+    max-height: 0;
+}
+
+/* Bottom part of the header (Links) */
+.sub-navbar {
+    height: 50px;
+    /* CHANGE: Border is less visible initially */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+}
+#main-header.scrolled .sub-navbar {
+    border-top: 1px solid transparent;
+}
+
+.sub-navbar .nav-link {
+    color: white;
+    font-weight: 600;
+    padding: 20 50px;
+    transition: color 0.3s ease;
+}
+.sub-navbar .nav-link:hover {
+    color: #e74c3c;
+}
+
+/* --- LOGO AND BUTTON STYLES (WITH FIX) --- */
+.logo {
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    /* FIX: Set an explicit, slightly taller height to prevent clipping */
+    height: 60px; 
+}
+
+.logo span {
+    font-family: 'Bungee', cursive;
+    display: block;
+    transition: transform 0.3s ease;
+    /* FIX: Set a more reasonable font-size that fits the navbar */
+    font-size: 26px; 
+    /* FIX: Set line-height to match the parent's height to vertically center it */
+    line-height: 30px; 
+}
+
+.logo::after {
+    content: "GO TO HOME";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    transform: translateY(100%);
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    /* FIX: Set line-height to match parent's height for vertical centering */
+    line-height: 30px; 
+}
+
+.logo:hover span {
+    transform: translateY(-100%);
+}
+.logo:hover::after {
+    transform: translateY(0);
+}
+.navbar-buttons {
+    display: flex;
+    gap: 10px;
+}
+/* REVISED CSS for the Download Button */
+.download-btn {
+    position: relative;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    overflow: hidden;
+    background-color: #e74c3c;
+    transition: all 0.4s ease; /* A slightly longer transition for a smoother effect */
+    z-index: 1; /* Ensure the button and its content are above the glass background */
+}
+
+/* Frosted glass layer behind the button text */
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* IMPORTANT: VERIFY THIS IMAGE PATH! */
+    background: url('Minecraft\ live\ wallpaper\ #1\ -\ Shadow\ Creates\ \(1080p\,\ h264\).mp4') no-repeat center center / cover;
+    filter: blur(10px);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+/* The Shine Effect Layer */
+.download-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px; /* Adjust the width of the shine band */
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.1)
+    );
+    transform: translateX(-150%) skewX(-30deg); /* Start off-screen and angled */
+    transition: transform 0.6s ease; /* Longer transition for a "passing" effect */
+}
+
+/* Hover state: make button background transparent, show glass, and animate the shine */
+.download-btn:hover {
+    background-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:hover::before {
+    opacity: 0.8;
+}
+
+.download-btn:hover::after {
+    transform: translateX(250%) skewX(-30deg); /* Animate the shine across the button */
+}
+.menu-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+.menu-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+
+/* --- YOUTUBE SECTION STYLES (Unchanged) --- */
+/* --- YOUTUBE SECTION STYLES (with fix) --- */
+#youtube-section {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3rem;
+    text-align: left;
+    transition: filter 0.3s ease-in-out; /* Add transition for smooth effect */
+    filter: blur(3px); /* Default blur */
+}
+
+#youtube-section:hover {
+    filter: none; /* Remove blur on hover */
+}
+
+.youtube-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1;
+}
+
+.youtube-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+.youtube-section-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.youtube-profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 900px;
+    gap: 2rem;
+}
+
+.youtube-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.good-knight-text {
+    font-family: 'Borel', sans-serif;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #ffffff;
+}
+
+.youtube-channel-name {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.youtube-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.youtube-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.youtube-logo:hover {
+    animation: logoGlowPulse 1.5s infinite alternate;
+}
+
+@keyframes logoGlowPulse {
+    0% {
+        box-shadow: 0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 30px #00ffff;
+    }
+    50% {
+        box-shadow: 0 0 15px #00ffff,
+                    0 0 30px #00ffff,
+                    0 0 60px #00ffff;
+    }
+    100% {
+        box-shadow: 0 0 20px #00ffff,
+                    0 0 40px #00ffff,
+                    0 0 80px #00ffff;
+    }
+}
+
+/* About Us Section */
+#about-us {
+    padding: 5rem 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    /* FIX: The background color is now removed to show the video underneath */
+    /* background-color: #111; */
+}
+
+/* FIX: The `about-us-background-video` now covers the whole section */
+.about-us-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(3px);
+    z-index: -2; /* This places it behind all other content */
+}
+
+/* The overlay remains the same and is necessary for readability */
+.about-us-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 2rem;
+    position: relative;
+    z-index: 1; /* This ensures the content is on top */
+}
+
+/* Tabs on the left */
+.about-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 150px;
+}
+
+.about-tabs .tab {
+    padding: 10px 15px;
+    border: none;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.about-tabs .tab:hover,
+.about-tabs .tab.active {
+    background: #00ffff; /* aqua highlight for active tab */
+    color: black;
+}
+
+/* Content area */
+.about-content {
+    display: flex;
+    flex: 1;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Image on left */
+.about-image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Text on right */
+.about-text {
+    flex: 1;
+}
+
+.about-text .tab-content h3 {
+    font-family: 'Bungee', cursive;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #00ffff; /* aqua heading */
+}
+
+.about-text .tab-content p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+/* --- CAROUSEL STYLES (Unchanged) --- */
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+}
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+.carousel-caption {
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
+    text-align: center;
+}
+.carousel-caption h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.carousel-caption p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #ccc;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+.carousel-caption .btn {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    transition: transform 0.3s ease;
+}
+.carousel-caption .btn:hover {
+    transform: scale(1.05);
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: none;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 3;
+}
+.carousel-control-prev-icon::after {
+    content: '❮';
+    font-size: 2.5rem;
+    color: white;
+}
+.carousel-control-next-icon::after {
+    content: '❯';
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* New Search Container and Input Styles */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* Pushes the container to the right */
+    margin-left: auto;
+}
+
+.search-input {
+ width: 0;
+    padding: 0;
+    opacity: 0;
+    
+    /* NEW: Transparent background and blurred effect */
+    background: transparent;
+    border: 1px solid #888; /* A lighter border to make it visible */
+    backdrop-filter: blur(5px);
+    
+    color: white;
+    font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
+    transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out, background 0.4s ease-in-out;
+    border-radius: 50px;
+    height: 40px;
+}
+
+/* State when the search bar is active */
+.search-container.active .search-input {
+    width: 250px; /* Or any desired width */
+    padding: 10px 15px;
+    opacity: 1;
+    border: 1px solid #444;
+    margin-right: 10px;
+}
+
+/* Style the search icon's link */
+.search-toggle {
+    /* Ensure the icon is centered */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
